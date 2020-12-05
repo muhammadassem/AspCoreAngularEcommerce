@@ -1,4 +1,9 @@
-bin
-obj
 appsettings.json
 *.db
+/.vs/skinet
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
