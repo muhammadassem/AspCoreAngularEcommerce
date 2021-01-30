@@ -15,6 +15,11 @@ namespace Infrastructure.Data
             _dbContext = dbContext;
         }
 
+        public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
+        {
+            return await _dbContext.ProductBrands.ToListAsync();
+        }
+
         public async Task<Product> GetProductByIdAsync(int id)
         {
             return await _dbContext.Products.Include(x => x.ProductBrand).Include(x => x.ProductType)
@@ -24,6 +29,11 @@ namespace Infrastructure.Data
         public async Task<IReadOnlyList<Product>> GetProductsAsync()
         {
             return await _dbContext.Products.Include(x => x.ProductBrand).Include(x => x.ProductType).ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
+        {
+            return await _dbContext.ProductTypes.ToListAsync();
         }
     }
 }
