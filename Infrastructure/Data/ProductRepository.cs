@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
@@ -7,33 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
-        private readonly StoreContext _dbContext;
-        public ProductRepository(StoreContext dbContext)
+        public ProductRepository(StoreContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
         }
 
-        public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
+        public override IQueryable<Product> GetAll()
         {
-            return await _dbContext.ProductBrands.ToListAsync();
-        }
-
-        public async Task<Product> GetProductByIdAsync(int id)
-        {
-            return await _dbContext.Products.Include(x => x.ProductBrand).Include(x => x.ProductType)
-                .FirstOrDefaultAsync(x => x.Id == id);
-        }
-
-        public async Task<IReadOnlyList<Product>> GetProductsAsync()
-        {
-            return await _dbContext.Products.Include(x => x.ProductBrand).Include(x => x.ProductType).ToListAsync();
-        }
-
-        public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
-        {
-            return await _dbContext.ProductTypes.ToListAsync();
+            return base.GetAll().Include(x => x.ProductBrand).Include(x => x.ProductType).AsQueryable();
         }
     }
 }
