@@ -4,7 +4,6 @@ using API.DTOs;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
-using Infastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
