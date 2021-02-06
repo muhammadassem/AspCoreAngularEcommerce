@@ -22,10 +22,11 @@ namespace API.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        public async Task<ActionResult<List<Product>>> GetProducts([FromQuery] ProductQueryDto filterDto)
         {
-            var products = await _productRepo.GetAll().ToListAsync();
-            return Ok(_mapper.Map<List<ProductDto>>(products));
+            var filter = _mapper.Map<ProductQueryDto, ProductQuery>(filterDto);
+            var products = await _productRepo.GetAllProducts(filter);
+            return Ok(_mapper.Map<QueryResult<Product>, QueryResultDto<ProductDto>>(products));
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
