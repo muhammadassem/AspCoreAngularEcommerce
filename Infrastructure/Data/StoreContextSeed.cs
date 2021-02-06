@@ -1,5 +1,5 @@
 ﻿using Core.Entities;
-using Infastructure.Data;
+using Infrastructure.Data;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

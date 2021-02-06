@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Core.Entities;
 using Core.Extensions;
 using Core.Interfaces;
-using Infastructure.Data;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
